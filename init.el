@@ -19,10 +19,13 @@
   (package-refresh-contents))
 
 (setq my-packages '(cider lush-theme rainbow-delimiters paredit color-theme
-			  exec-path-from-shell))
+			  exec-path-from-shell web-mode))
 (dolist (package my-packages)
   (unless (package-installed-p package)
     (package-install package)))
+
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
 
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'clojure-mode-hook #'rainbow-delimiters-mode)
