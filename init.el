@@ -27,7 +27,8 @@
   (package-refresh-contents))
 
 (setq my-packages '(cider rainbow-delimiters paredit color-theme
-			  exec-path-from-shell company coffee-mode))
+			  exec-path-from-shell company coffee-mode
+			  magit))
 
 (dolist (package my-packages)
   (unless (package-installed-p package)
@@ -40,6 +41,7 @@
 
 (defun turn-on-paredit () (paredit-mode 1))
 (add-hook 'clojure-mode-hook 'turn-on-paredit)
+(add-hook 'cider-repl-mode-hook #'paredit-mode)
 
 (show-paren-mode 1)
 
