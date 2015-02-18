@@ -28,7 +28,7 @@
 
 (setq my-packages '(cider rainbow-delimiters paredit color-theme
 			  exec-path-from-shell company coffee-mode
-			  magit))
+			  magit slim-mode))
 
 (dolist (package my-packages)
   (unless (package-installed-p package)
