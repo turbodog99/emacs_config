@@ -6,6 +6,9 @@
   kept-old-versions 5    ; and how many of the old
   )
 
+(setq auto-save-file-name-transforms
+          `((".*" ,temporary-file-directory t)))
+
 (defvar macosx-p (string-match "darwin" (symbol-name system-type)))
 (unless (eq window-system nil)
   (cond (macosx-p (setq mac-allow-anti-aliasing nil))))
