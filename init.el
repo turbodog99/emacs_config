@@ -6,6 +6,9 @@
   kept-old-versions 5    ; and how many of the old
   )
 
+;; This gives you a tab of 2 spaces
+(custom-set-variables '(coffee-tab-width 2))
+
 (setq auto-save-file-name-transforms
           `((".*" ,temporary-file-directory t)))
 
