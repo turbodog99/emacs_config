@@ -1,2 +1,7 @@
 backups/
 elpa/
+places
+*~
+.smex-items
+\#*#
+

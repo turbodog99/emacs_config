@@ -1,3 +1,17 @@
+(setq backup-directory-alist '(("." . "~/.emacs.d/backup"))
+  backup-by-copying t    ; Don't delink hardlinks
+  version-control t      ; Use version numbers on backups
+  delete-old-versions t  ; Automatically delete excess backups
+  kept-new-versions 20   ; how many of the newest versions to keep
+  kept-old-versions 5    ; and how many of the old
+  )
+
+;; This gives you a tab of 2 spaces
+(custom-set-variables '(coffee-tab-width 2))
+
+(setq auto-save-file-name-transforms
+          `((".*" ,temporary-file-directory t)))
+
 (defvar macosx-p (string-match "darwin" (symbol-name system-type)))
 (unless (eq window-system nil)
   (cond (macosx-p (setq mac-allow-anti-aliasing nil))))
@@ -18,8 +32,10 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-(setq my-packages '(cider lush-theme rainbow-delimiters paredit color-theme
-			  exec-path-from-shell web-mode))
+(setq my-packages '(cider rainbow-delimiters paredit color-theme
+			  exec-path-from-shell company coffee-mode
+			  magit slim-mode))
+
 (dolist (package my-packages)
   (unless (package-installed-p package)
     (package-install package)))
@@ -27,15 +43,19 @@
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
 
+(add-hook 'after-init-hook 'global-company-mode)
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'clojure-mode-hook #'rainbow-delimiters-mode)
 
 (defun turn-on-paredit () (paredit-mode 1))
 (add-hook 'clojure-mode-hook 'turn-on-paredit)
+(add-hook 'cider-repl-mode-hook #'paredit-mode)
 
 (show-paren-mode 1)
 
-(load-theme 'lush t)
+(require 'color-theme)
+(color-theme-initialize)
+(color-theme-tty-dark)
 
 (tool-bar-mode 0)
 
