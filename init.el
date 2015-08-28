@@ -32,7 +32,7 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-(setq my-packages '(cider rainbow-delimiters paredit color-theme
+(setq my-packages '(clojure-mode cider rainbow-delimiters paredit color-theme
 			  exec-path-from-shell company coffee-mode
 			  magit slim-mode))
 
@@ -82,3 +82,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(defun cygwin-shell ()
+  "Run cygwin bash in shell mode."
+  (interactive)
+  (let ((explicit-shell-file-name "D:/cygwin64/bin/bash"))
+    (call-interactively 'shell)))
