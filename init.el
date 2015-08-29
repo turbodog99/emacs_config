@@ -55,7 +55,8 @@
 
 (require 'color-theme)
 (color-theme-initialize)
-(color-theme-tty-dark)
+; (color-theme-tty-dark)
+(color-theme-parus)
 
 (tool-bar-mode 0)
 
