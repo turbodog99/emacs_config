@@ -34,7 +34,7 @@
 
 (setq my-packages '(clojure-mode cider rainbow-delimiters paredit color-theme
 			  exec-path-from-shell company coffee-mode
-			  magit slim-mode))
+			  magit slim-mode web-mode))
 
 (dolist (package my-packages)
   (unless (package-installed-p package)
