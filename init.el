@@ -6,6 +6,11 @@
   kept-old-versions 5    ; and how many of the old
   )
 
+(add-to-list 'load-path "~/.emacs.d/lisp/")
+
+(load-library "xclip")
+(require 'xclip)
+
 ;; This gives you a tab of 2 spaces
 (custom-set-variables '(coffee-tab-width 2))
 
@@ -34,7 +39,9 @@
 
 (setq my-packages '(clojure-mode cider rainbow-delimiters paredit color-theme
 			  exec-path-from-shell company coffee-mode
-			  magit slim-mode web-mode))
+			  magit slim-mode web-mode nyan-mode ggtags))
+
+(nyan-mode)
 
 (dolist (package my-packages)
   (unless (package-installed-p package)
@@ -55,8 +62,11 @@
 
 (require 'color-theme)
 (color-theme-initialize)
+(add-to-list 'custom-theme-load-path "~/.emacs.d/site-lisp/themes/")
+
+(load-file "~/.emacs.d/site-lisp/themes/color-theme-railscasts.el")
+
 ; (color-theme-tty-dark)
-(color-theme-parus)
 
 (tool-bar-mode 0)
 
@@ -89,3 +99,22 @@
   (interactive)
   (let ((explicit-shell-file-name "D:/cygwin64/bin/bash"))
     (call-interactively 'shell)))
+
+; C Programming
+; Mostly from http://tuhdo.github.io/c-ide.html
+
+(require 'ggtags)
+(add-hook 'c-mode-common-hook
+          (lambda ()
+            (when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode)
+              (ggtags-mode 1))))
+
+(define-key ggtags-mode-map (kbd "C-c g s") 'ggtags-find-other-symbol)
+(define-key ggtags-mode-map (kbd "C-c g h") 'ggtags-view-tag-history)
+(define-key ggtags-mode-map (kbd "C-c g r") 'ggtags-find-reference)
+(define-key ggtags-mode-map (kbd "C-c g f") 'ggtags-find-file)
+(define-key ggtags-mode-map (kbd "C-c g c") 'ggtags-create-tags)
+(define-key ggtags-mode-map (kbd "C-c g u") 'ggtags-update-tags)
+
+(define-key ggtags-mode-map (kbd "M-,") 'pop-tag-mark)
+
