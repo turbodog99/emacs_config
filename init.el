@@ -13,13 +13,14 @@
 
 ;; This gives you a tab of 2 spaces
 (custom-set-variables '(coffee-tab-width 2))
+(setq js-indent-level 2)
 
 (setq auto-save-file-name-transforms
           `((".*" ,temporary-file-directory t)))
 
-(defvar macosx-p (string-match "darwin" (symbol-name system-type)))
-(unless (eq window-system nil)
-  (cond (macosx-p (setq mac-allow-anti-aliasing nil))))
+;; (defvar macosx-p (string-match "darwin" (symbol-name system-type)))
+;; (unless (eq window-system nil)
+;;   (cond (macosx-p (setq mac-allow-anti-aliasing nil))))
 
 (set-face-attribute 'default nil :height 160)
 
@@ -39,7 +40,8 @@
 
 (setq my-packages '(clojure-mode cider rainbow-delimiters paredit color-theme
 			  exec-path-from-shell company coffee-mode
-			  magit slim-mode web-mode nyan-mode ggtags))
+			  magit slim-mode web-mode sass-mode haml-mode nyan-mode ggtags
+			  flycheck js2-mode json-mode exec-path-from-shell))
 
 (nyan-mode)
 
@@ -47,8 +49,16 @@
   (unless (package-installed-p package)
     (package-install package)))
 
+;; Ido
+(require 'ido)
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(ido-mode 1)
+
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
+
+(add-to-list 'auto-mode-alist '("\\.scss$" . sass-mode))
 
 (add-hook 'after-init-hook 'global-company-mode)
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
@@ -66,7 +76,14 @@
 
 (load-file "~/.emacs.d/site-lisp/themes/color-theme-railscasts.el")
 
-; (color-theme-tty-dark)
+; (global-hl-line-mode 1)
+
+(add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
+(defadvice web-mode-highlight-part (around tweak-jsx activate)
+  (if (equal web-mode-content-type "jsx")
+      (let ((web-mode-enable-part-face nil))
+        ad-do-it)
+    ad-do-it))
 
 (tool-bar-mode 0)
 
