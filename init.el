@@ -98,19 +98,6 @@
     (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
     (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes (quote ("3164a65923ef23e0f3dff9f9607b4da1e07ef1c3888d0f6878feef6c28357732" default))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-
 (defun cygwin-shell ()
   "Run cygwin bash in shell mode."
   (interactive)
@@ -134,4 +121,54 @@
 (define-key ggtags-mode-map (kbd "C-c g u") 'ggtags-update-tags)
 
 (define-key ggtags-mode-map (kbd "M-,") 'pop-tag-mark)
+
+;; http://www.flycheck.org/manual/latest/index.html
+(require 'flycheck)
+
+(setq flycheck-eslintrc "~/.eslintrc")
+
+;; turn on flychecking globally
+(add-hook 'after-init-hook #'global-flycheck-mode)
+
+;; disable jshint since we prefer eslint checking
+(setq-default flycheck-disabled-checkers
+  (append flycheck-disabled-checkers
+    '(javascript-jshint)))
+
+;; use eslint with web-mode for jsx files
+(flycheck-add-mode 'javascript-eslint 'web-mode)
+
+;; customize flycheck temp file prefix
+(setq-default flycheck-temp-prefix ".flycheck")
+
+;; disable json-jsonlist checking for json files
+(setq-default flycheck-disabled-checkers
+  (append flycheck-disabled-checkers
+    '(json-jsonlist)))
+
+;; https://github.com/purcell/exec-path-from-shell
+;; only need exec-path-from-shell on OSX
+;; this hopefully sets up path and other vars better
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
+
+;; adjust indents for web-mode to 2 spaces
+(defun my-web-mode-hook ()
+  "Hooks for Web mode. Adjust indents"
+  ;;; http://web-mode.org/
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-code-indent-offset 2))
+(add-hook 'web-mode-hook  'my-web-mode-hook)
+
+;; for better jsx syntax-highlighting in web-mode
+;; - courtesy of Patrick @halbtuerke
+(defadvice web-mode-highlight-part (around tweak-jsx activate)
+  (if (equal web-mode-content-type "jsx")
+    (let ((web-mode-enable-part-face nil))
+      ad-do-it)
+    ad-do-it))
+
+(tool-bar-mode 0)
+
 
