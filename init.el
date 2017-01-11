@@ -20,6 +20,10 @@
 	   (getenv "PATH"))))
 
 ;; Suppress beeping on right and left touchpad scroll
+(global-set-key [wheel-right] 'ignore)
+(global-set-key [wheel-left] 'ignore)
+(global-set-key [double-wheel-right] 'ignore)
+(global-set-key [double-wheel-left] 'ignore)
 (global-set-key [triple-wheel-right] 'ignore)
 (global-set-key [triple-wheel-left] 'ignore)
 
