@@ -11,6 +11,22 @@
 (load-library "xclip")
 (require 'xclip)
 
+;; Fix Windows grep path to use MSYS
+(when (eq system-type 'windows-nt)
+  (setenv "PATH"
+	  (concat
+	   ;; Change this with your path to MSYS bin directory
+	   "D:\\MinGW\\bin;"
+	   (getenv "PATH"))))
+
+;; Suppress beeping on right and left touchpad scroll
+(global-set-key [wheel-right] 'ignore)
+(global-set-key [wheel-left] 'ignore)
+(global-set-key [double-wheel-right] 'ignore)
+(global-set-key [double-wheel-left] 'ignore)
+(global-set-key [triple-wheel-right] 'ignore)
+(global-set-key [triple-wheel-left] 'ignore)
+
 ;; This gives you a tab of 2 spaces
 (custom-set-variables '(coffee-tab-width 2))
 (setq js-indent-level 2)
