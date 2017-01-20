@@ -15,12 +15,19 @@
 (custom-set-variables '(coffee-tab-width 2))
 (setq js-indent-level 2)
 
+(setq explicit-bash-args '("--noediting" "--login" "-i"))
+
 (setq auto-save-file-name-transforms
           `((".*" ,temporary-file-directory t)))
 
 ;; (defvar macosx-p (string-match "darwin" (symbol-name system-type)))
 ;; (unless (eq window-system nil)
 ;;   (cond (macosx-p (setq mac-allow-anti-aliasing nil))))
+
+(setq mac-option-key-is-meta nil)
+(setq mac-command-key-is-meta t)
+(setq mac-command-modifier 'meta)
+(setq mac-option-modifier nil)
 
 (set-face-attribute 'default nil :height 160)
 
