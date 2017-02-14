@@ -11,6 +11,9 @@
 (load-library "xclip")
 (require 'xclip)
 
+(when (string= system-type "darwin")       
+  (setq dired-use-ls-dired nil))
+
 ;; Fix Windows grep path to use MSYS
 (when (eq system-type 'windows-nt)
   (setenv "PATH"
@@ -28,7 +31,15 @@
 (global-set-key [triple-wheel-left] 'ignore)
 
 ;; This gives you a tab of 2 spaces
-(custom-set-variables '(coffee-tab-width 2))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(coffee-tab-width 2)
+ '(package-selected-packages
+   (quote
+    (web-mode slim-mode sass-mode rainbow-delimiters paredit nyan-mode magit json-mode js2-mode ggtags flycheck exec-path-from-shell company color-theme coffee-mode cider))))
 (setq js-indent-level 2)
 
 (setq explicit-bash-args '("--noediting" "--login" "-i"))
@@ -195,3 +206,9 @@
 (tool-bar-mode 0)
 
 
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
