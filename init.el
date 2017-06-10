@@ -6,6 +6,9 @@
   kept-old-versions 5    ; and how many of the old
   )
 
+(setq web-mode-content-types-alist
+  '(("jsx" . "\\.js[x]?\\'")))
+
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 
 (load-library "xclip")
@@ -112,7 +115,7 @@
 
 ; (global-hl-line-mode 1)
 
-(add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.js[x]?\\'" . web-mode))
 (defadvice web-mode-highlight-part (around tweak-jsx activate)
   (if (equal web-mode-content-type "jsx")
       (let ((web-mode-enable-part-face nil))
