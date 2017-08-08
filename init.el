@@ -17,6 +17,10 @@
 (when (string= system-type "darwin")       
   (setq dired-use-ls-dired nil))
 
+(setq-default indent-tabs-mode nil)
+
+(setq ruby-indent-level 2)
+
 ;; Fix Windows grep path to use MSYS
 (when (eq system-type 'windows-nt)
   (setenv "PATH"
@@ -42,7 +46,14 @@
  '(coffee-tab-width 2)
  '(package-selected-packages
    (quote
-    (web-mode slim-mode sass-mode rainbow-delimiters paredit nyan-mode magit json-mode js2-mode ggtags flycheck exec-path-from-shell company color-theme coffee-mode cider))))
+    (fill-column-indicator web-mode slim-mode sass-mode rainbow-delimiters paredit nyan-mode magit json-mode js2-mode ggtags flycheck exec-path-from-shell company color-theme coffee-mode cider))))
+
+;; (require 'fill-column-indicator)
+;; TODO: set appropriate columns per mode type
+
+;; (setq fci-rule-column 80)
+;; (add-hook 'after-change-major-mode-hook 'fci-mode)
+
 (setq js-indent-level 2)
 
 (setq explicit-bash-args '("--noediting" "--login" "-i"))
@@ -59,7 +70,7 @@
 (setq mac-command-modifier 'meta)
 (setq mac-option-modifier nil)
 
-(set-face-attribute 'default nil :height 160)
+(set-face-attribute 'default nil :height 145)
 
 (require 'package)
 
@@ -215,3 +226,4 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(put 'erase-buffer 'disabled nil)
