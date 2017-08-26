@@ -37,23 +37,7 @@
 (global-set-key [triple-wheel-right] 'ignore)
 (global-set-key [triple-wheel-left] 'ignore)
 
-;; This gives you a tab of 2 spaces
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(coffee-tab-width 2)
- '(package-selected-packages
-   (quote
-    (fill-column-indicator web-mode slim-mode sass-mode rainbow-delimiters paredit nyan-mode magit json-mode js2-mode ggtags flycheck exec-path-from-shell company color-theme coffee-mode cider))))
-
-;; (require 'fill-column-indicator)
-;; TODO: set appropriate columns per mode type
-
-;; (setq fci-rule-column 80)
-;; (add-hook 'after-change-major-mode-hook 'fci-mode)
-
+(setq coffee-tab-width 2)
 (setq js-indent-level 2)
 
 (setq explicit-bash-args '("--noediting" "--login" "-i"))
@@ -89,13 +73,23 @@
 (setq my-packages '(clojure-mode cider rainbow-delimiters paredit color-theme
 			  exec-path-from-shell company coffee-mode
 			  magit slim-mode web-mode sass-mode haml-mode nyan-mode ggtags
-			  flycheck js2-mode json-mode exec-path-from-shell))
-
-(nyan-mode)
+			  flycheck js2-mode json-mode exec-path-from-shell
+                          fill-column-indicator web-mode slim-mode sass-mode
+                          rainbow-delimiters paredit nyan-mode magit json-mode
+                          js2-mode ggtags flycheck exec-path-from-shell company
+                          color-theme coffee-mode cider elm-mode))
 
 (dolist (package my-packages)
   (unless (package-installed-p package)
     (package-install package)))
+
+(nyan-mode)
+
+;; (require 'fill-column-indicator)
+;; TODO: set appropriate columns per mode type
+
+;; (setq fci-rule-column 80)
+;; (add-hook 'after-change-major-mode-hook 'fci-mode)
 
 ;; Ido
 (require 'ido)
@@ -227,3 +221,11 @@
  ;; If there is more than one, they won't work right.
  )
 (put 'erase-buffer 'disabled nil)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (elm-mode web-mode slim-mode sass-mode rainbow-delimiters paredit nyan-mode magit json-mode js2-mode ggtags flycheck fill-column-indicator exec-path-from-shell company color-theme coffee-mode cider))))
