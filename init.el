@@ -220,12 +220,6 @@
 (setq ido-everywhere t)
 (ido-mode 1)
 
-
-;;; Clojure Mode settings
-(defun turn-on-paredit () (paredit-mode 1))
-(add-hook 'clojure-mode-hook 'turn-on-paredit)
-(add-hook 'cider-repl-mode-hook #'paredit-mode)
-
 ;;; LISP Mode settings
 
 (autoload 'enable-paredit-mode "paredit"
