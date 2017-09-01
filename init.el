@@ -18,8 +18,23 @@
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 
-;; Hide tool bar at the top of graphical emacs
+;; Hide tool and menu bars at the top of graphical emacs
 (tool-bar-mode 0)
+
+;; This should hide menu on server started in TTY
+(unless (display-graphic-p)
+  (menu-bar-mode -1))
+
+;; Disable menu bar only on TTY frames. This should handle
+;; when a server creates new frames on TTY or GUI.
+(defun contextual-menubar (&optional frame)
+  "Display the menubar in FRAME (default: selected frame) if on a
+   graphical display, but hide it if in terminal."
+  (interactive)
+  (set-frame-parameter frame 'menu-bar-lines
+                             (if (display-graphic-p frame)
+                                  1 0)))
+(add-hook 'after-make-frame-functions 'contextual-menubar)
 
 (require 'package)
 
@@ -81,6 +96,7 @@
 ;; Displays a rule across the right edge to indicate a certain
 ;; column number.
 (require 'fill-column-indicator)
+
 ;; TODO: set appropriate columns per mode type
 (setq fci-rule-column 81)
 
