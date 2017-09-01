@@ -14,12 +14,16 @@
 (load-library "xclip")
 (require 'xclip)
 
-(when (string= system-type "darwin")       
+(when (string= system-type "darwin")
   (setq dired-use-ls-dired nil))
+
+(define-key global-map [select] 'end-of-line)
 
 (setq-default indent-tabs-mode nil)
 
 (setq ruby-indent-level 2)
+
+(xterm-mouse-mode)
 
 ;; Fix Windows grep path to use MSYS
 (when (eq system-type 'windows-nt)
@@ -77,7 +81,7 @@
                           fill-column-indicator web-mode slim-mode sass-mode
                           rainbow-delimiters paredit nyan-mode magit json-mode
                           js2-mode ggtags flycheck exec-path-from-shell company
-                          color-theme coffee-mode cider elm-mode))
+                          color-theme coffee-mode cider elm-mode haskell-mode))
 
 (dolist (package my-packages)
   (unless (package-installed-p package)
@@ -198,7 +202,7 @@
 (defun my-web-mode-hook ()
   "My customizations for Web mode"
   ;;; http://web-mode.org/
-  
+
   ;;; Set indents
   (setq web-mode-markup-indent-offset 2)
   (setq web-mode-css-indent-offset 2)
