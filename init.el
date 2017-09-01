@@ -71,11 +71,12 @@
 
 (require 'color-theme)
 (color-theme-initialize)
-(color-theme-deep-blue)
+
+;; (color-theme-deep-blue)
 
 ;; Railscast theme
-;; (add-to-list 'custom-theme-load-path "~/.emacs.d/site-lisp/themes/")
-;; (load-file "~/.emacs.d/site-lisp/themes/color-theme-railscasts.el")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/site-lisp/themes/")
+(load-file "~/.emacs.d/site-lisp/themes/color-theme-railscasts.el")
 
 ;; Displays a rule across the right edge to indicate a certain
 ;; column number.
