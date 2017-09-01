@@ -1,5 +1,3 @@
-;;;; Emacs Config
-
 ;;; General setup and defaults
 
 ;; Keep Emacs backup files out of source tree
@@ -121,6 +119,9 @@
 (setq-default flycheck-disabled-checkers
   (append flycheck-disabled-checkers
     '(json-jsonlist)))
+
+;; don't complain about elisp documentation
+(setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
 
 ;;; Text-based settings and helpers
 
