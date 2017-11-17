@@ -22,9 +22,10 @@
 (tool-bar-mode 0)
 
 ;; This should hide menu on server started in TTY
-(unless (display-graphic-p)
-  (menu-bar-mode -1))
+;; (unless (display-graphic-p)
+;;   (menu-bar-mode -1))
 
+(menu-bar-mode -1)
 ;; Disable menu bar only on TTY frames. This should handle
 ;; when a server creates new frames on TTY or GUI.
 (defun contextual-menubar (&optional frame)
@@ -56,7 +57,7 @@
                           rainbow-delimiters paredit nyan-mode magit json-mode
                           js2-mode ggtags flycheck exec-path-from-shell company
                           color-theme coffee-mode cider elm-mode haskell-mode
-                          ggtags))
+                          ggtags go-mode))
 
 (dolist (package my-packages)
   (unless (package-installed-p package)
@@ -219,6 +220,7 @@
 (add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.scss$" . sass-mode))
 (add-to-list 'auto-mode-alist '("\\.js[x]?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.hbs\\'" . web-mode))
 
 ;;; Ruby Mode settings
 
@@ -272,3 +274,17 @@
 (define-key ggtags-mode-map (kbd "C-c g u") 'ggtags-update-tags)
 
 (define-key ggtags-mode-map (kbd "M-,") 'pop-tag-mark)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (go-mode haskell-mode elm-mode ggtags fill-column-indicator json-mode js2-mode flycheck nyan-mode sass-mode web-mode slim-mode magit coffee-mode company exec-path-from-shell color-theme paredit rainbow-delimiters cider clojure-mode))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
