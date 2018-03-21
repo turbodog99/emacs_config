@@ -21,6 +21,15 @@
 ;; Hide tool and menu bars at the top of graphical emacs
 (tool-bar-mode 0)
 
+;; Hide scroll bars
+; (toggle-scroll-bar -1)
+
+(defun my/disable-scroll-bars (frame)
+  (modify-frame-parameters frame
+                           '((vertical-scroll-bars . nil)
+                             (horizontal-scroll-bars . nil))))
+(add-hook 'after-make-frame-functions 'my/disable-scroll-bars)
+
 ;; This should hide menu on server started in TTY
 ;; (unless (display-graphic-p)
 ;;   (menu-bar-mode -1))
@@ -28,14 +37,14 @@
 (menu-bar-mode -1)
 ;; Disable menu bar only on TTY frames. This should handle
 ;; when a server creates new frames on TTY or GUI.
-(defun contextual-menubar (&optional frame)
-  "Display the menubar in FRAME (default: selected frame) if on a
-   graphical display, but hide it if in terminal."
-  (interactive)
-  (set-frame-parameter frame 'menu-bar-lines
-                             (if (display-graphic-p frame)
-                                  1 0)))
-(add-hook 'after-make-frame-functions 'contextual-menubar)
+;; (defun contextual-menubar (&optional frame)
+;;   "Display the menubar in FRAME (default: selected frame) if on a
+;;    graphical display, but hide it if in terminal."
+;;   (interactive)
+;;   (set-frame-parameter frame 'menu-bar-lines
+;;                              (if (display-graphic-p frame)
+;;                                   1 0)))
+;; (add-hook 'after-make-frame-functions 'contextual-menubar)
 
 (require 'package)
 
@@ -57,14 +66,14 @@
                           rainbow-delimiters paredit nyan-mode magit json-mode
                           js2-mode ggtags flycheck exec-path-from-shell company
                           color-theme coffee-mode cider elm-mode haskell-mode
-                          ggtags go-mode))
+                          ggtags go-mode yaml-mode))
 
 (dolist (package my-packages)
   (unless (package-installed-p package)
     (package-install package)))
 
 ;; Sets font size in graphical Emacs
-(set-face-attribute 'default nil :height 145)
+(set-face-attribute 'default nil :height 180)
 
 ;; Don't use tabs for indent by default
 (setq-default indent-tabs-mode nil)
@@ -88,11 +97,11 @@
 (require 'color-theme)
 (color-theme-initialize)
 
-;; (color-theme-deep-blue)
+(color-theme-parus)
 
 ;; Railscast theme
-(add-to-list 'custom-theme-load-path "~/.emacs.d/site-lisp/themes/")
-(load-file "~/.emacs.d/site-lisp/themes/color-theme-railscasts.el")
+;; (add-to-list 'custom-theme-load-path "~/.emacs.d/site-lisp/themes/")
+;; (load-file "~/.emacs.d/site-lisp/themes/color-theme-railscasts.el")
 
 ;; Displays a rule across the right edge to indicate a certain
 ;; column number.
@@ -147,6 +156,9 @@
 (define-key global-map [select] 'end-of-line)
 
 ;;; Term settings
+
+(eval-after-load "term"
+  '(define-key term-raw-map (kbd "C-c C-y") 'term-paste))
 
 ;; TODO: Not sure if this is working
 (setq explicit-bash-args '("--noediting" "--login" "-i"))
@@ -219,8 +231,11 @@
 ;; File type hooks
 (add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.scss$" . sass-mode))
-(add-to-list 'auto-mode-alist '("\\.js[x]?\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.hbs\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.js[x]?$" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.hbs$" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.php$" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.clj$" . clojure-mode))
+(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 
 ;;; Ruby Mode settings
 
@@ -250,6 +265,8 @@
 (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
 (add-hook 'clojure-mode-hook          #'enable-paredit-mode)
 (add-hook 'cider-repl-mode-hook       #'enable-paredit-mode)
+
+(add-to-list 'auto-mode-alist '("\\.el$" . lisp-mode))
 
 (defun cygwin-shell ()
   "Run cygwin bash in shell mode."
@@ -281,7 +298,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (go-mode haskell-mode elm-mode ggtags fill-column-indicator json-mode js2-mode flycheck nyan-mode sass-mode web-mode slim-mode magit coffee-mode company exec-path-from-shell color-theme paredit rainbow-delimiters cider clojure-mode))))
+    (yaml-mode php-mode go-mode haskell-mode elm-mode ggtags fill-column-indicator json-mode js2-mode flycheck nyan-mode sass-mode web-mode slim-mode magit coffee-mode company exec-path-from-shell color-theme paredit rainbow-delimiters cider clojure-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
