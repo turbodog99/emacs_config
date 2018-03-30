@@ -21,6 +21,9 @@
 ;; Hide tool and menu bars at the top of graphical emacs
 (tool-bar-mode 0)
 
+;; Hide scroll bars
+(scroll-bar-mode -1)
+
 ;; This should hide menu on server started in TTY
 ;; (unless (display-graphic-p)
 ;;   (menu-bar-mode -1))
