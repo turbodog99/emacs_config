@@ -49,19 +49,22 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-(setq my-packages '(clojure-mode cider rainbow-delimiters paredit color-theme
+(setq my-packages '(clojure-mode cider rainbow-delimiters paredit
 			  exec-path-from-shell company coffee-mode
 			  magit slim-mode web-mode sass-mode haml-mode nyan-mode
 			  flycheck js2-mode json-mode exec-path-from-shell
                           fill-column-indicator web-mode slim-mode sass-mode
                           rainbow-delimiters paredit nyan-mode magit json-mode
                           js2-mode ggtags flycheck exec-path-from-shell company
-                          color-theme coffee-mode cider elm-mode haskell-mode
-                          ggtags go-mode))
+                          coffee-mode cider elm-mode haskell-mode
+                          ggtags go-mode color-theme-modern))
 
 (dolist (package my-packages)
   (unless (package-installed-p package)
     (package-install package)))
+
+(load-theme 'clarity t t)
+(enable-theme 'clarity)
 
 ;; Sets font size in graphical Emacs
 (set-face-attribute 'default nil :height 145)
@@ -84,15 +87,6 @@
 (add-hook 'after-init-hook 'global-company-mode)
 
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
-
-(require 'color-theme)
-(color-theme-initialize)
-
-;; (color-theme-deep-blue)
-
-;; Railscast theme
-(add-to-list 'custom-theme-load-path "~/.emacs.d/site-lisp/themes/")
-(load-file "~/.emacs.d/site-lisp/themes/color-theme-railscasts.el")
 
 ;; Displays a rule across the right edge to indicate a certain
 ;; column number.
@@ -281,7 +275,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (go-mode haskell-mode elm-mode ggtags fill-column-indicator json-mode js2-mode flycheck nyan-mode sass-mode web-mode slim-mode magit coffee-mode company exec-path-from-shell color-theme paredit rainbow-delimiters cider clojure-mode))))
+    (go-mode haskell-mode elm-mode ggtags fill-column-indicator json-mode js2-mode flycheck nyan-mode sass-mode web-mode slim-mode magit coffee-mode company exec-path-from-shell paredit rainbow-delimiters cider clojure-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
