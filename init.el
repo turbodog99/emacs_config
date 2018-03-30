@@ -33,7 +33,7 @@
 (defun my/set-font-size (&optional frame)
   ;; Sets font size in graphical Emacs
   (with-selected-frame (or frame (selected-frame))
-    (let ((font-size (if (eq window-system 'x) 140 170)))
+    (let ((font-size (if (eq window-system 'x) 160 170)))
       (set-face-attribute 'default nil :height font-size))))
 
 (my/set-font-size)
