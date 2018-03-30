@@ -22,13 +22,22 @@
 (tool-bar-mode 0)
 
 ;; Hide scroll bars
-; (toggle-scroll-bar -1)
+(toggle-scroll-bar -1)
 
 (defun my/disable-scroll-bars (frame)
   (modify-frame-parameters frame
                            '((vertical-scroll-bars . nil)
                              (horizontal-scroll-bars . nil))))
 (add-hook 'after-make-frame-functions 'my/disable-scroll-bars)
+
+(defun my/set-font-size (&optional frame)
+  ;; Sets font size in graphical Emacs
+  (with-selected-frame (or frame (selected-frame))
+    (let ((font-size (if (eq window-system 'x) 140 170)))
+      (set-face-attribute 'default nil :height font-size))))
+
+(my/set-font-size)
+(add-hook 'after-make-frame-functions 'my/set-font-size)
 
 ;; This should hide menu on server started in TTY
 ;; (unless (display-graphic-p)
@@ -71,9 +80,6 @@
 (dolist (package my-packages)
   (unless (package-installed-p package)
     (package-install package)))
-
-;; Sets font size in graphical Emacs
-(set-face-attribute 'default nil :height 180)
 
 ;; Don't use tabs for indent by default
 (setq-default indent-tabs-mode nil)
@@ -305,3 +311,17 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+; The following is from http://sachachua.com/blog/2016/04/keep-emacs-alive-x-crashes-running-background-daemon/
+(defun my/ssh-refresh ()
+  "Reset the environment variable SSH_AUTH_SOCK"
+  (interactive)
+  (let (ssh-auth-sock-old (getenv "SSH_AUTH_SOCK"))
+    (setenv "SSH_AUTH_SOCK"
+            (car (split-string
+                  (shell-command-to-string
+                   "ls -t $(find /tmp/ssh-* -user $USER -name 'agent.*' 2> /dev/null)"))))
+    (message
+     (format "SSH_AUTH_SOCK %s --> %s"
+             ssh-auth-sock-old (getenv "SSH_AUTH_SOCK")))))
+(my/ssh-refresh)
