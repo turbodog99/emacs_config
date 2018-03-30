@@ -67,19 +67,22 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-(setq my-packages '(clojure-mode cider rainbow-delimiters paredit color-theme
+(setq my-packages '(clojure-mode cider rainbow-delimiters paredit
 			  exec-path-from-shell company coffee-mode
 			  magit slim-mode web-mode sass-mode haml-mode nyan-mode
 			  flycheck js2-mode json-mode exec-path-from-shell
                           fill-column-indicator web-mode slim-mode sass-mode
                           rainbow-delimiters paredit nyan-mode magit json-mode
                           js2-mode ggtags flycheck exec-path-from-shell company
-                          color-theme coffee-mode cider elm-mode haskell-mode
-                          ggtags go-mode yaml-mode))
+                          coffee-mode cider elm-mode haskell-mode
+                          ggtags go-mode color-theme-modern))
 
 (dolist (package my-packages)
   (unless (package-installed-p package)
     (package-install package)))
+
+(load-theme 'clarity t t)
+(enable-theme 'clarity)
 
 ;; Don't use tabs for indent by default
 (setq-default indent-tabs-mode nil)
@@ -99,15 +102,6 @@
 (add-hook 'after-init-hook 'global-company-mode)
 
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
-
-(require 'color-theme)
-(color-theme-initialize)
-
-(color-theme-parus)
-
-;; Railscast theme
-;; (add-to-list 'custom-theme-load-path "~/.emacs.d/site-lisp/themes/")
-;; (load-file "~/.emacs.d/site-lisp/themes/color-theme-railscasts.el")
 
 ;; Displays a rule across the right edge to indicate a certain
 ;; column number.
@@ -297,20 +291,6 @@
 (define-key ggtags-mode-map (kbd "C-c g u") 'ggtags-update-tags)
 
 (define-key ggtags-mode-map (kbd "M-,") 'pop-tag-mark)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (yaml-mode php-mode go-mode haskell-mode elm-mode ggtags fill-column-indicator json-mode js2-mode flycheck nyan-mode sass-mode web-mode slim-mode magit coffee-mode company exec-path-from-shell color-theme paredit rainbow-delimiters cider clojure-mode))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
 
 ; The following is from http://sachachua.com/blog/2016/04/keep-emacs-alive-x-crashes-running-background-daemon/
 (defun my/ssh-refresh ()
