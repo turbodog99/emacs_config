@@ -75,7 +75,7 @@
                           rainbow-delimiters paredit nyan-mode magit json-mode
                           js2-mode ggtags flycheck exec-path-from-shell company
                           coffee-mode cider elm-mode haskell-mode
-                          ggtags go-mode color-theme-modern))
+                          ggtags go-mode color-theme-modern yaml-mode))
 
 (dolist (package my-packages)
   (unless (package-installed-p package)
@@ -236,6 +236,8 @@
 (add-to-list 'auto-mode-alist '("\\.php$" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.clj$" . clojure-mode))
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+(add-to-list 'auto-mode-alist '("\\.env$" . sh-mode))
+(add-to-list 'auto-mode-alist '("\\.avsc$" . json-mode))
 
 ;;; Ruby Mode settings
 
@@ -305,3 +307,17 @@
      (format "SSH_AUTH_SOCK %s --> %s"
              ssh-auth-sock-old (getenv "SSH_AUTH_SOCK")))))
 (my/ssh-refresh)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (yaml-mode web-mode slim-mode sass-mode rainbow-delimiters paredit nyan-mode magit json-mode js2-mode haskell-mode go-mode ggtags flycheck fill-column-indicator exec-path-from-shell elm-mode company color-theme-modern coffee-mode cider))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
