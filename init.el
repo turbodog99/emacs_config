@@ -75,7 +75,8 @@
                           rainbow-delimiters paredit nyan-mode magit json-mode
                           js2-mode ggtags flycheck exec-path-from-shell company
                           coffee-mode cider elm-mode haskell-mode
-                          ggtags go-mode color-theme-modern simpleclip yaml-mode))
+                          ggtags go-mode color-theme-modern simpleclip yaml-mode
+                          restclient))
 
 (dolist (package my-packages)
   (unless (package-installed-p package)
@@ -84,9 +85,9 @@
 (require 'simpleclip)
 (simpleclip-mode 1)
 
-(global-set-key (kbd "C-c C-v") 'simpleclip-paste)
-(global-set-key (kbd "C-c C-c") 'simpleclip-copy)
-(global-set-key (kbd "C-c C-x") 'simpleclip-cut)
+(global-set-key (kbd "<ESC> C-v") 'simpleclip-paste)
+(global-set-key (kbd "<ESC> C-c") 'simpleclip-copy)
+(global-set-key (kbd "<ESC> C-x") 'simpleclip-cut)
 
 (load-theme 'clarity t t)
 (enable-theme 'clarity)
@@ -314,3 +315,17 @@
      (format "SSH_AUTH_SOCK %s --> %s"
              ssh-auth-sock-old (getenv "SSH_AUTH_SOCK")))))
 (my/ssh-refresh)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (restclient yaml-mode web-mode slim-mode simpleclip sass-mode rainbow-delimiters paredit nyan-mode magit json-mode js2-mode haskell-mode go-mode ggtags flycheck fill-column-indicator exec-path-from-shell elm-mode company color-theme-modern color-theme coffee-mode cider))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
