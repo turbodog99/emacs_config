@@ -18,6 +18,10 @@
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 
+;; Enable clipboard to kill ring
+(setq x-select-enable-clipboard t)
+(setq x-select-enable-primary t)
+
 ;; Hide tool and menu bars at the top of graphical emacs
 (tool-bar-mode 0)
 
@@ -33,7 +37,7 @@
 (defun my/set-font-size (&optional frame)
   ;; Sets font size in graphical Emacs
   (with-selected-frame (or frame (selected-frame))
-    (let ((font-size (if (eq window-system 'x) 160 170)))
+    (let ((font-size (if (eq window-system 'x) 130 170)))
       (set-face-attribute 'default nil :height font-size))))
 
 (my/set-font-size)
