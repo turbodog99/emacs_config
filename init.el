@@ -288,6 +288,13 @@
   (let ((explicit-shell-file-name "D:/cygwin64/bin/bash"))
     (call-interactively 'shell)))
 
+;;; Cider settings
+(defun my-cider-repl-mode-hook ()
+  "My customizations for Cider mode"
+  (define-key cider-repl-mode-map (kbd "C-S-<down>") 'cider-repl-next-input)
+  (define-key cider-repl-mode-map (kbd "C-S-<up>") 'cider-repl-previous-input))
+(add-hook 'cider-repl-mode-hook 'my-cider-repl-mode-hook)
+
 ; C Programming
 ; Mostly from http://tuhdo.github.io/c-ide.html
 
