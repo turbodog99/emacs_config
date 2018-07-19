@@ -255,6 +255,13 @@
 
 (setq ruby-indent-level 2)
 
+;;; JSON Mode settings
+(add-hook 'json-mode-hook
+          (lambda ()
+            ; Make variable local so it doesn't conflict with JS mode
+            (make-local-variable 'js-indent-level)
+            (setq js-indent-level 2)))
+
 ;;; Coffee Mode settings
 
 (setq coffee-tab-width 2)
