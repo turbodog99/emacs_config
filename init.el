@@ -25,6 +25,9 @@
 ;; Hide tool and menu bars at the top of graphical emacs
 (tool-bar-mode 0)
 
+;; Disable anti-aliasing on Mac
+(setq mac-allow-anti-aliasing nil)
+
 ;; Hide scroll bars
 (toggle-scroll-bar -1)
 
@@ -92,9 +95,6 @@
 (global-set-key (kbd "<ESC> C-v") 'simpleclip-paste)
 (global-set-key (kbd "<ESC> C-c") 'simpleclip-copy)
 (global-set-key (kbd "<ESC> C-x") 'simpleclip-cut)
-
-(load-theme 'clarity t t)
-(enable-theme 'clarity)
 
 ;; Don't use tabs for indent by default
 (setq-default indent-tabs-mode nil)
@@ -338,6 +338,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("5eb4b22e97ddb2db9ecce7d983fa45eb8367447f151c7e1b033af27820f43760" "db510eb70cf96e3dbd48f5d24de12b03db30674ea0853f06074d4ccf7403d7d3" default)))
  '(package-selected-packages
    (quote
     (restclient yaml-mode web-mode slim-mode simpleclip sass-mode rainbow-delimiters paredit nyan-mode magit json-mode js2-mode haskell-mode go-mode ggtags flycheck fill-column-indicator exec-path-from-shell elm-mode company color-theme-modern color-theme coffee-mode cider))))
