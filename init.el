@@ -40,7 +40,7 @@
 (defun my/set-font (&optional frame)
   ;; Sets font size in graphical Emacs
   (with-selected-frame (or frame (selected-frame))
-    (set-frame-font "Consolas-13:antialias=subpixel")
+    (set-frame-font "Hack-13:antialias=subpixel")
     ;; (let ((font-size (if (eq window-system 'x) 150 110)))
     ;;   (set-face-attribute 'default nil :height font-size))
     ))
@@ -264,6 +264,8 @@
   ;; company is an optional dependency. You have to
   ;; install it separately via package-install
   ;; `M-x package-install [ret] company`
+  (setq typescript-indent-level
+        (or (plist-get (tide-tsfmt-options) ':indentSize) 4))
   (company-mode +1))
 
 ;; aligns annotation to the right hand side
