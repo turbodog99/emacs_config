@@ -37,14 +37,16 @@
                              (horizontal-scroll-bars . nil))))
 (add-hook 'after-make-frame-functions 'my/disable-scroll-bars)
 
-(defun my/set-font-size (&optional frame)
+(defun my/set-font (&optional frame)
   ;; Sets font size in graphical Emacs
   (with-selected-frame (or frame (selected-frame))
-    (let ((font-size (if (eq window-system 'x) 150 170)))
-      (set-face-attribute 'default nil :height font-size))))
+    (set-frame-font "Consolas-13:antialias=subpixel")
+    ;; (let ((font-size (if (eq window-system 'x) 150 110)))
+    ;;   (set-face-attribute 'default nil :height font-size))
+    ))
 
-(my/set-font-size)
-(add-hook 'after-make-frame-functions 'my/set-font-size)
+(my/set-font)
+(add-hook 'after-make-frame-functions 'my/set-font)
 
 ;; This should hide menu on server started in TTY
 ;; (unless (display-graphic-p)
@@ -83,7 +85,7 @@
                           js2-mode ggtags flycheck exec-path-from-shell company
                           coffee-mode cider elm-mode haskell-mode
                           ggtags go-mode color-theme-modern simpleclip yaml-mode
-                          restclient))
+                          restclient tide))
 
 (dolist (package my-packages)
   (unless (package-installed-p package)
@@ -251,6 +253,35 @@
 (add-to-list 'auto-mode-alist '("\\.env$" . sh-mode))
 (add-to-list 'auto-mode-alist '("\\.avsc$" . json-mode))
 
+;;; TypeScript
+(defun setup-tide-mode ()
+  (interactive)
+  (tide-setup)
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1)
+  ;; company is an optional dependency. You have to
+  ;; install it separately via package-install
+  ;; `M-x package-install [ret] company`
+  (company-mode +1))
+
+;; aligns annotation to the right hand side
+(setq company-tooltip-align-annotations t)
+
+;; formats the buffer before saving
+(add-hook 'before-save-hook 'tide-format-before-save)
+
+(add-hook 'typescript-mode-hook #'setup-tide-mode)
+
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
+(add-hook 'web-mode-hook
+          (lambda ()
+            (when (string-equal "tsx" (file-name-extension buffer-file-name))
+              (setup-tide-mode))))
+;; enable typescript-tslint checker
+(flycheck-add-mode 'typescript-tslint 'web-mode)
+
 ;;; Ruby Mode settings
 
 (setq ruby-indent-level 2)
@@ -340,7 +371,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("5eb4b22e97ddb2db9ecce7d983fa45eb8367447f151c7e1b033af27820f43760" "db510eb70cf96e3dbd48f5d24de12b03db30674ea0853f06074d4ccf7403d7d3" default)))
+    ("0f302165235625ca5a827ac2f963c102a635f27879637d9021c04d845a32c568" "45482e7ddf47ab1f30fe05f75e5f2d2118635f5797687e88571842ff6f18b4d5" "4c8372c68b3eab14516b6ab8233de2f9e0ecac01aaa859e547f902d27310c0c3" "5eb4b22e97ddb2db9ecce7d983fa45eb8367447f151c7e1b033af27820f43760" "db510eb70cf96e3dbd48f5d24de12b03db30674ea0853f06074d4ccf7403d7d3" default)))
  '(package-selected-packages
    (quote
     (restclient yaml-mode web-mode slim-mode simpleclip sass-mode rainbow-delimiters paredit nyan-mode magit json-mode js2-mode haskell-mode go-mode ggtags flycheck fill-column-indicator exec-path-from-shell elm-mode company color-theme-modern color-theme coffee-mode cider))))
