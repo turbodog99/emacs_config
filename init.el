@@ -265,7 +265,7 @@
   ;; install it separately via package-install
   ;; `M-x package-install [ret] company`
   (setq typescript-indent-level
-        (or (plist-get (tide-tsfmt-options) ':indentSize) 4))
+        (or (plist-get (tide-tsfmt-options) ':indentSize) 2))
   (company-mode +1))
 
 ;; aligns annotation to the right hand side
@@ -373,7 +373,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("0f302165235625ca5a827ac2f963c102a635f27879637d9021c04d845a32c568" "45482e7ddf47ab1f30fe05f75e5f2d2118635f5797687e88571842ff6f18b4d5" "4c8372c68b3eab14516b6ab8233de2f9e0ecac01aaa859e547f902d27310c0c3" "5eb4b22e97ddb2db9ecce7d983fa45eb8367447f151c7e1b033af27820f43760" "db510eb70cf96e3dbd48f5d24de12b03db30674ea0853f06074d4ccf7403d7d3" default)))
+    ("2047464bf6781156ebdac9e38a17b97bd2594b39cfeaab561afffcbbe19314e2" "fb09acc5f09e521581487697c75b71414830b1b0a2405c16a9ece41b2ae64222" "67b11ee5d10f1b5f7638035d1a38f77bca5797b5f5b21d16a20b5f0452cbeb46" "0f302165235625ca5a827ac2f963c102a635f27879637d9021c04d845a32c568" "45482e7ddf47ab1f30fe05f75e5f2d2118635f5797687e88571842ff6f18b4d5" "4c8372c68b3eab14516b6ab8233de2f9e0ecac01aaa859e547f902d27310c0c3" "5eb4b22e97ddb2db9ecce7d983fa45eb8367447f151c7e1b033af27820f43760" "db510eb70cf96e3dbd48f5d24de12b03db30674ea0853f06074d4ccf7403d7d3" default)))
  '(package-selected-packages
    (quote
     (restclient yaml-mode web-mode slim-mode simpleclip sass-mode rainbow-delimiters paredit nyan-mode magit json-mode js2-mode haskell-mode go-mode ggtags flycheck fill-column-indicator exec-path-from-shell elm-mode company color-theme-modern color-theme coffee-mode cider))))
