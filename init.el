@@ -213,6 +213,7 @@
            ;; TODO: see if there's an MSYS_HOME or similar variable
 	   ;; Change this with your path to MSYS bin directory
 	   "D:\\MinGW\\bin;"
+           "C:\\gnu_tools\\bin;"
 	   (getenv "PATH"))))
 
 ;;; Web Mode settings
