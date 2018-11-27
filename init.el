@@ -220,6 +220,8 @@
 
 (require 'web-mode)
 
+(setq web-mode-enable-auto-quoting nil)
+
 (setq web-mode-content-types-alist
   '(("jsx" . "\\.js[x]?\\'")))
 
