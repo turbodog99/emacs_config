@@ -40,7 +40,7 @@
 (defun my/set-font (&optional frame)
   ;; Sets font size in graphical Emacs
   (with-selected-frame (or frame (selected-frame))
-    (set-frame-font "Hack-13:antialias=subpixel")
+    (set-frame-font "Monospace-13:antialias=subpixel")
     ;; (let ((font-size (if (eq window-system 'x) 150 110)))
     ;;   (set-face-attribute 'default nil :height font-size))
     ))
