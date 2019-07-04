@@ -105,7 +105,8 @@ There are two things you can do about this warning:
 (with-eval-after-load 'rust-mode
   (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
-(exec-path-from-shell-initialize)
+(when (not (eq system-type 'windows-nt))
+  (exec-path-from-shell-initialize))
 
 (require 'simpleclip)
 (simpleclip-mode 1)
