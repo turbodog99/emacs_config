@@ -36,7 +36,7 @@
 (defun my/set-font (&optional frame)
   (with-selected-frame (or frame (selected-frame))
     (pcase window-system
-      ('ns (set-frame-font "Monaco-15")))))
+      ('ns (set-frame-font "Monaco-17")))))
 
 (my/set-font)
 (add-hook 'after-make-frame-functions 'my/set-font)
