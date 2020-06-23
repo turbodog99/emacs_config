@@ -364,6 +364,8 @@ There are two things you can do about this warning:
   (define-key cider-repl-mode-map (kbd "C-S-<up>") 'cider-repl-previous-input))
 (add-hook 'cider-repl-mode-hook 'my-cider-repl-mode-hook)
 
+(cider-auto-test-mode 1)
+
 ;; Rust Programming
 ;; Much of this comes from http://julienblanchard.com/2016/fancy-rust-development-with-emacs/
 
